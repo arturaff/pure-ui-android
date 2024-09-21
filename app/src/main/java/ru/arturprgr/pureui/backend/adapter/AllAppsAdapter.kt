@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.arturprgr.pureui.R
+import ru.arturprgr.pureui.backend.data.Singleton
 import ru.arturprgr.pureui.backend.model.App
 import ru.arturprgr.pureui.databinding.LayoutAppBinding
+import ru.arturprgr.pureui.launcher.screens.MainFragment
 
 class AllAppsAdapter : RecyclerView.Adapter<AllAppsAdapter.ViewHolder>() {
     private val adapter = arrayListOf<App>()
@@ -33,17 +35,27 @@ class AllAppsAdapter : RecyclerView.Adapter<AllAppsAdapter.ViewHolder>() {
                         R.id.add_on_main -> {
                             val sharedPreferences =
                                 app.context.getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
-                            val quantity = sharedPreferences.getInt("quantity", 0)
-                            if (quantity != 0) {
-                                sharedPreferences.edit().putInt("quantity", quantity + 1).apply()
-                                sharedPreferences.edit().putString("app${quantity + 1}", app.packageName)
-                                    .apply()
-                            } else {
-                                sharedPreferences.edit().putInt("quantity", 1).apply()
-                                sharedPreferences.edit().putString("app1", app.packageName).apply()
+                            Singleton.mainAppsList.add(app.packageName)
+                            for (index in 0..19) {
+                                try {
+                                    Singleton.mainAppsList[index]
+                                } catch (_: IndexOutOfBoundsException) {
+                                    MainFragment.addApp(
+                                        app.context,
+                                        app.context.packageManager,
+                                        app.packageName,
+                                        index
+                                    )
+                                    break
+                                }
                             }
-                            sharedPreferences.registerOnSharedPreferenceChangeListener { sPrefs, key ->
-                            }
+                            Log.d("Attempt", "app${Singleton.mainAppsAdapter.itemCount}")
+                            sharedPreferences.edit()
+                                .putString(
+                                    "app${Singleton.mainAppsAdapter.itemCount}",
+                                    app.packageName
+                                )
+                                .apply()
                             true
                         }
 
@@ -75,7 +87,6 @@ class AllAppsAdapter : RecyclerView.Adapter<AllAppsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(adapter[position])
-
 
     fun addApp(app: App) {
         adapter.add(app)

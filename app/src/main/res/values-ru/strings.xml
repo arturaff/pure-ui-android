@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PureUI</string>
+    <string name="add_on_main">Добавить на главную</string>
+    <string name="remove">Убрать</string>
+    <string name="move_up">Вверх</string>
+    <string name="move_down">Вниз</string>
+    <string name="app_info">О приложении</string>
+    <string name="delete">Удалить</string>
+    <string name="search">Поиск</string>
+</resources>

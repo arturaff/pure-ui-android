@@ -1,20 +1,25 @@
 package ru.arturprgr.pureui.backend.adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.arturprgr.pureui.R
-import ru.arturprgr.pureui.databinding.LayoutAppBinding
+import ru.arturprgr.pureui.backend.data.Singleton
 import ru.arturprgr.pureui.backend.model.App
+import ru.arturprgr.pureui.databinding.LayoutAppBinding
 
 class MainAppsAdapter : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
     private val adapter = arrayListOf<App>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(app: App) = with(LayoutAppBinding.bind(itemView)) {
+            Log.d("Attempt", "Добавление на главный экран. Индекс: ${app.index}")
             label.text = app.label
             icon.setImageDrawable(app.drawable)
             click.setOnClickListener {
@@ -28,14 +33,16 @@ class MainAppsAdapter : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
                 popupMenu.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.remove -> {
-                            true
-                        }
-
-                        R.id.move_up -> {
-                            true
-                        }
-
-                        R.id.move_down -> {
+                            Log.d(
+                                "Attempt",
+                                "Удаление элемента с главного экрана. Индекс: ${app.index}"
+                            )
+                            val index = Singleton.mainAppsList.indexOf(app.packageName)
+                            app.context.getSharedPreferences("sPrefs", Context.MODE_PRIVATE).edit().remove("app${app.index}").apply()
+                            if (index != -1) {
+                                Singleton.mainAppsAdapter.removeAtIndex(index)
+                                Singleton.mainAppsList.removeAt(index)
+                            }
                             true
                         }
 
@@ -48,21 +55,26 @@ class MainAppsAdapter : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.layout_app, parent, false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.layout_app, parent, false
         )
+    )
 
     override fun getItemCount(): Int = adapter.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(adapter[position])
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addApp(app: App) {
         adapter.add(app)
-        notifyItemInserted(app.index)
-        notifyItemRangeChanged(app.index, adapter.size)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeAtIndex(index: Int) {
+        adapter.removeAt(index)
+        notifyDataSetChanged()
     }
 }
