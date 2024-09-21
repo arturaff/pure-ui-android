@@ -8,4 +8,8 @@
     <string name="app_info">О приложении</string>
     <string name="delete">Удалить</string>
     <string name="search">Поиск</string>
+    <string name="select_your_default_home_screen">Выберите главный экран по умолчанию</string>
+    <string name="to_use_the_launcher_you_need_to_select_the_PureUI_application_as_your_default_home_screen">Чтобы использовать лаунчер, вам необходимо выбрать приложение PureUI в качестве главного экрана по умолчанию.</string>
+    <string name="сhoose">Выбрать</string>
+    <string name="no">Нет</string>
 </resources>
