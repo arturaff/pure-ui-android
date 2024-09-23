@@ -11,6 +11,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.arturprgr.pureui.backend.adapter.MainAppsAdapter
@@ -18,6 +20,7 @@ import ru.arturprgr.pureui.backend.data.Singleton
 import ru.arturprgr.pureui.backend.model.App
 import ru.arturprgr.pureui.backend.receiver.BatteryReceiver
 import ru.arturprgr.pureui.databinding.FragmentMainBinding
+import kotlin.math.roundToInt
 
 
 class MainFragment : Fragment() {
@@ -37,7 +40,7 @@ class MainFragment : Fragment() {
         for (index in 0..19) {
             val app = "${sharedPreferences.getString("app$index", "")}"
             if (app != "") {
-                addApp(requireContext(), requireContext().packageManager, app, index)
+                addApp(requireContext(), sharedPreferences, requireContext().packageManager, app, index)
                 Singleton.mainAppsList.add(app)
             }
         }
@@ -67,11 +70,13 @@ class MainFragment : Fragment() {
     }
 
     companion object {
-        fun addApp(context: Context, packageManager: PackageManager, packageName: String, index: Int) {
+        fun addApp(context: Context, sharedPreferences: SharedPreferences, packageManager: PackageManager, packageName: String, index: Int) {
             if (packageName != "" || packageName != "ru.arturprgr.pureui") Singleton.mainAppsAdapter.addApp(
                 App(
                     context,
                     index,
+                    sharedPreferences.getFloat("2131362209", 25F),
+                    sharedPreferences.getFloat("2131362210", 50F),
                     "${
                         packageManager.getApplicationLabel(
                             packageManager.getApplicationInfo(

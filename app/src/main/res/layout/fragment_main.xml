@@ -8,6 +8,7 @@
     tools:context=".launcher.MainActivity">
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -26,7 +27,6 @@
                 android:id="@+id/clock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/advent_pro"
                 android:format12Hour="h:mm"
                 android:textSize="80sp" />
 

@@ -1,5 +1,8 @@
 package ru.arturprgr.pureui.launcher.screens
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
@@ -7,9 +10,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.arturprgr.pureui.R
 import ru.arturprgr.pureui.backend.adapter.AllAppsAdapter
 import ru.arturprgr.pureui.backend.data.Singleton
 import ru.arturprgr.pureui.backend.getPackages
@@ -20,8 +25,10 @@ import java.util.Locale
 class AllAppsFragment : Fragment() {
     private lateinit var binding: FragmentAllAppsBinding
     private lateinit var packageManager: PackageManager
-    private var isSearch: Boolean = false
     private lateinit var allAppsAdapter: AllAppsAdapter
+    private lateinit var menuMore: PopupMenu
+    private lateinit var sharedPreferences: SharedPreferences
+    private var isSearch: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +37,15 @@ class AllAppsFragment : Fragment() {
         binding = FragmentAllAppsBinding.inflate(inflater, container, false)
         packageManager = requireContext().packageManager
         allAppsAdapter = AllAppsAdapter()
+        menuMore = PopupMenu(requireContext(), binding.more)
+        menuMore.inflate(R.menu.menu_more)
+        menuMore.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.settings -> startActivity(Intent(requireContext(), SettingsActivity::class.java))
+            }
+            true
+        }
+        sharedPreferences = requireContext().getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
 
         Singleton.allAppsList = getPackages(requireContext().packageManager)
         viewAllApps()
@@ -61,6 +77,8 @@ class AllAppsFragment : Fragment() {
                                 App(
                                     requireContext(),
                                     0,
+                                    sharedPreferences.getFloat("2131362209", 25F),
+                                    sharedPreferences.getFloat("2131362210", 50F),
                                     "${packageManager.getApplicationLabel(pack.applicationInfo)}",
                                     packageManager.getApplicationIcon(pack.applicationInfo),
                                     pack.packageName
@@ -70,6 +88,11 @@ class AllAppsFragment : Fragment() {
                     }
                 }
             })
+
+            more.setOnClickListener {
+                menuMore.show()
+            }
+
             search.setOnClickListener {
                 isSearch = !isSearch
                 editSearch.isVisible = isSearch
@@ -91,6 +114,8 @@ class AllAppsFragment : Fragment() {
                 App(
                     requireContext(),
                     0,
+                    sharedPreferences.getFloat("2131362209", 25F),
+                    sharedPreferences.getFloat("2131362210", 50F),
                     "${packageManager.getApplicationLabel(pack.applicationInfo)}",
                     packageManager.getApplicationIcon(pack.applicationInfo),
                     pack.packageName
