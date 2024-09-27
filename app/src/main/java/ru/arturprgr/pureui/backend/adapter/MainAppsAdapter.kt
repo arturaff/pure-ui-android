@@ -22,16 +22,16 @@ class MainAppsAdapter : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(app: App) = with(LayoutAppBinding.bind(itemView)) {
             Log.d("Attempt", "Добавление на главный экран. Индекс: ${app.index}")
-            val iconParams = icon.layoutParams as FrameLayout.LayoutParams
-            iconParams.width = (app.size * 3).toInt()
-            iconParams.height = (app.size * 3).toInt()
-            icon.setLayoutParams(iconParams)
-            val cardViewParams = cardView.layoutParams as LinearLayout.LayoutParams
-            cardViewParams.width = (app.size * 3).toInt()
-            cardViewParams.height = (app.size * 3).toInt()
-            cardView.setLayoutParams(cardViewParams)
-            cardView.radius = app.round * 3
             label.text = app.label
+            val iconParams = icon.layoutParams as FrameLayout.LayoutParams
+            iconParams.width = (app.size * 3)
+            iconParams.height = (app.size * 3)
+            icon.setLayoutParams(iconParams)
+            val cardViewParams = card.layoutParams as LinearLayout.LayoutParams
+            cardViewParams.width = (app.size * 3)
+            cardViewParams.height = (app.size * 3)
+            card.setLayoutParams(cardViewParams)
+            card.radius = app.round.toFloat() * 3
             icon.setImageDrawable(app.drawable)
             click.setOnClickListener {
                 val intent: Intent? =
@@ -49,7 +49,8 @@ class MainAppsAdapter : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
                                 "Удаление элемента с главного экрана. Индекс: ${app.index}"
                             )
                             val index = Singleton.mainAppsList.indexOf(app.packageName)
-                            app.context.getSharedPreferences("sPrefs", Context.MODE_PRIVATE).edit().remove("app${app.index}").apply()
+                            app.context.getSharedPreferences("sPrefs", Context.MODE_PRIVATE).edit()
+                                .remove("app${app.index}").apply()
                             if (index != -1) {
                                 Singleton.mainAppsAdapter.removeAtIndex(index)
                                 Singleton.mainAppsList.removeAt(index)

@@ -11,26 +11,10 @@
     <string name="to_use_the_launcher_you_need_to_select_the_PureUI_application_as_your_default_home_screen">To use the launcher, you need to select the PureUI application as your default home screen</string>
     <string name="сhoose">Choose</string>
     <string name="no">No</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings">Settings</string>
-    <string name="decoration">Decoration</string>
     <string name="icon_rounding">Icon rounding</string>
-    <string name="font">Font</string>
-    <string name="download_more_fonts">Download More Fonts</string>
     <string name="icon_size">Icon Size</string>
     <string name="opening_the_settings_main_screen">Opening the settings main screen</string>
-    <!-- Settings Activity Title -->
-
-    <!-- Preference Titles -->
-
-    <!-- Messages Preferences -->
-
-    <!-- Sync Preferences -->
     <string name="widget_location">Widget location</string>
-    <string name="setting_background_tint">Setting background tint</string>
-    <string name="enter_the_hex_code_of_the_color_to_set_it_as_the_main_background">Enter the HEX code of the color to set it as the main background</string>
-    <string name="apply">Apply</string>
-    <string name="hex_color_code">HEX color code</string>
-    <string name="cancel">Cancel</string>
+    <string name="font">Font</string>
 </resources>

@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
-    @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        setTheme(getSharedPreferences("sPrefs", Context.MODE_PRIVATE).getInt("selectFont", R.style.Base_Theme_PureUI))
         binding = ActivityMainBinding.inflate(layoutInflater)
         sharedPreferences = getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        if (!sharedPreferences.getBoolean("is_default", false)) {
+
+        if (!sharedPreferences.getBoolean("is_default", false))
             AlertDialog.Builder(this@MainActivity)
                 .setTitle(resources.getString(R.string.select_your_default_home_screen))
                 .setMessage(resources.getString(R.string.to_use_the_launcher_you_need_to_select_the_PureUI_application_as_your_default_home_screen))
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 .setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
                 .create()
                 .show()
-        }
+
 
         binding.apply {
             Singleton.viewPager = viewPager

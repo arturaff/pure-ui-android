@@ -2,6 +2,7 @@ package ru.arturprgr.pureui.backend.data
 
 import android.app.Application
 import android.content.pm.PackageInfo
+import android.graphics.Typeface
 import androidx.viewpager.widget.ViewPager
 import ru.arturprgr.pureui.backend.adapter.MainAppsAdapter
 import ru.arturprgr.pureui.backend.adapter.ViewPagerAdapter

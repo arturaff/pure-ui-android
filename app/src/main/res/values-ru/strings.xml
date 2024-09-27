@@ -12,4 +12,10 @@
     <string name="to_use_the_launcher_you_need_to_select_the_PureUI_application_as_your_default_home_screen">Чтобы использовать лаунчер, вам необходимо выбрать приложение PureUI в качестве главного экрана по умолчанию.</string>
     <string name="сhoose">Выбрать</string>
     <string name="no">Нет</string>
+    <string name="settings">Настройки</string>
+    <string name="icon_rounding">Закругление значка</string>
+    <string name="icon_size">Размер значка</string>
+    <string name="opening_the_settings_main_screen">Открыть настройки главного экрана</string>
+    <string name="widget_location">Расположение виджета</string>
+    <string name="font">Шрифт</string>
 </resources>

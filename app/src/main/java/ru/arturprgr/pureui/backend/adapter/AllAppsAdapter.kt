@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.PopupMenu
-import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import ru.arturprgr.pureui.R
 import ru.arturprgr.pureui.backend.data.Singleton
@@ -27,14 +26,14 @@ class AllAppsAdapter : RecyclerView.Adapter<AllAppsAdapter.ViewHolder>() {
             label.text = app.label
             icon.setImageDrawable(app.drawable)
             val iconParams = icon.layoutParams as FrameLayout.LayoutParams
-            iconParams.width = (app.size * 3).toInt()
-            iconParams.height = (app.size * 3).toInt()
+            iconParams.width = (app.size * 3)
+            iconParams.height = (app.size * 3)
             icon.setLayoutParams(iconParams)
-            val cardViewParams = cardView.layoutParams as LinearLayout.LayoutParams
-            cardViewParams.width = (app.size * 3).toInt()
-            cardViewParams.height = (app.size * 3).toInt()
-            cardView.setLayoutParams(cardViewParams)
-            cardView.radius = app.round * 3
+            val cardViewParams = card.layoutParams as LinearLayout.LayoutParams
+            cardViewParams.width = (app.size * 3)
+            cardViewParams.height = (app.size * 3)
+            card.setLayoutParams(cardViewParams)
+            card.radius = app.round.toFloat() * 3
             click.setOnClickListener {
                 val intent: Intent? =
                     app.context.packageManager.getLaunchIntentForPackage(app.packageName)

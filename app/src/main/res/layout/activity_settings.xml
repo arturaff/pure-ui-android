@@ -14,6 +14,7 @@
         tools:context=".launcher.screens.SettingsActivity">
 
         <TextView
+            android:id="@+id/settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -35,9 +36,10 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/icon_rounding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/icon_rounding"
                 android:textSize="18sp" />
 
@@ -59,6 +61,7 @@
                 tools:text="25" />
 
             <TextView
+                android:id="@+id/icon_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -83,26 +86,30 @@
                 tools:text="50" />
 
             <TextView
+                android:id="@+id/font"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/font" />
+                android:text="@string/font"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/select_font"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_marginTop="8dp" />
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:entries="@array/fonts"
+                android:max="50"
+                android:progress="100" />
 
-            <Button
-                android:id="@+id/download_fonts"
+            <FrameLayout
+                android:id="@+id/preview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/black"
-                android:text="@string/download_more_fonts"
-                android:textColor="@color/white" />
-
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                tools:ignore="UselessLeaf" />
 
         </LinearLayout>
 

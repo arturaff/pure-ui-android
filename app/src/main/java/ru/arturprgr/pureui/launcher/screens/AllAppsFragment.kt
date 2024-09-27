@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -77,8 +79,8 @@ class AllAppsFragment : Fragment() {
                                 App(
                                     requireContext(),
                                     0,
-                                    sharedPreferences.getFloat("2131362209", 25F),
-                                    sharedPreferences.getFloat("2131362210", 50F),
+                                    sharedPreferences.getInt("selectIconRound", 25),
+                                    sharedPreferences.getInt("selectIconSize", 50),
                                     "${packageManager.getApplicationLabel(pack.applicationInfo)}",
                                     packageManager.getApplicationIcon(pack.applicationInfo),
                                     pack.packageName
@@ -95,7 +97,9 @@ class AllAppsFragment : Fragment() {
 
             search.setOnClickListener {
                 isSearch = !isSearch
-                editSearch.isVisible = isSearch
+                Handler(Looper.getMainLooper()).postDelayed({
+                    editSearch.isVisible = isSearch
+                }, 1)
                 if (!isSearch) {
                     editSearch.setText("")
                     viewAllApps()
@@ -114,8 +118,8 @@ class AllAppsFragment : Fragment() {
                 App(
                     requireContext(),
                     0,
-                    sharedPreferences.getFloat("2131362209", 25F),
-                    sharedPreferences.getFloat("2131362210", 50F),
+                    sharedPreferences.getInt("selectIconRound", 25),
+                    sharedPreferences.getInt("selectIconSize", 50),
                     "${packageManager.getApplicationLabel(pack.applicationInfo)}",
                     packageManager.getApplicationIcon(pack.applicationInfo),
                     pack.packageName
