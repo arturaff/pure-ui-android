@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PureUI</string>
+    <string name="add_on_main">Add on main</string>
+    <string name="remove">Remove</string>
+    <string name="move_up">Move up</string>
+    <string name="move_down">Move down</string>
+    <string name="app_info">App info</string>
+    <string name="delete">Delete</string>
+    <string name="search">Search</string>
+    <string name="select_your_default_home_screen">Select your default home screen</string>
+    <string name="to_use_the_launcher_you_need_to_select_the_PureUI_application_as_your_default_home_screen">To use the launcher, you need to select the PureUI application as your default home screen</string>
+    <string name="сhoose">Choose</string>
+    <string name="no">No</string>
+    <string name="settings">Settings</string>
+    <string name="icon_rounding">Icon rounding (default 25)</string>
+    <string name="icon_size">Icon size (default 50)</string>
+    <string name="opening_the_settings_main_screen">Opening the settings main screen</string>
+    <string name="font">Font</string>
+    <string name="indentation">Indentation (default 200)</string>
+</resources>

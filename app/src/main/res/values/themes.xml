@@ -1,0 +1,140 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PureUI" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/advent_pro</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="alegreya" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/alegreya</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="amatic_sc" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/amatic_sc</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="bad_script" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/bad_script</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="caveat" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/caveat</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="comfotaa" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/comfortaa</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="jost" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/jost</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="jura" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/jura</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="marck_script" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/marck_script</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="merriweather" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/merriweather</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="nunito" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="pacifico" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/pacifico</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="pangolin" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/pangolin</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="poiret_one" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/poiret_one</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="sofia_sans" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/sofia_sans</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="ubuntu" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/ubuntu</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="yanone_kaffeesatz" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/yanone_kaffeesatz</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="Theme.PureUI" parent="Base.Theme.PureUI" />
+</resources>

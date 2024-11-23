@@ -1,0 +1,22 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="fonts">
+        <item>Advent Pro</item>
+        <item>Alegreya</item>
+        <item>Amatic SC</item>
+        <item>Bad Script</item>
+        <item>Caveat</item>
+        <item>Comfortaa</item>
+        <item>Jost</item>
+        <item>Jura</item>
+        <item>Marck Script</item>
+        <item>Merriweather</item>
+        <item>Nunito</item>
+        <item>Pacifico</item>
+        <item>Pangolin</item>
+        <item>Poiret One</item>
+        <item>Sofia Sans</item>
+        <item>Ubuntu</item>
+        <item>Yanone Kaffeesatz</item>
+    </string-array>
+</resources>

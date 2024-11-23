@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PureUI</string>
+    <string name="add_on_main">Добавить на главную</string>
+    <string name="remove">Убрать</string>
+    <string name="move_up">Вверх</string>
+    <string name="move_down">Вниз</string>
+    <string name="app_info">О приложении</string>
+    <string name="delete">Удалить</string>
+    <string name="search">Поиск</string>
+    <string name="select_your_default_home_screen">Выберите главный экран по умолчанию</string>
+    <string name="to_use_the_launcher_you_need_to_select_the_PureUI_application_as_your_default_home_screen">Чтобы использовать лаунчер, вам необходимо выбрать приложение PureUI в качестве главного экрана по умолчанию.</string>
+    <string name="сhoose">Выбрать</string>
+    <string name="no">Нет</string>
+    <string name="settings">Настройки</string>
+    <string name="icon_rounding">Закругление значка (по умолчанию 25)</string>
+    <string name="icon_size">Размер значка (по умолчанию 50)</string>
+    <string name="opening_the_settings_main_screen">Открыть настройки главного экрана</string>
+    <string name="font">Шрифт</string>
+    <string name="indentation">Отступ (по умолчанию 200)</string>
+</resources>

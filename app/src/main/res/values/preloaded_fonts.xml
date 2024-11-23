@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/advent_pro</item>
+        <item>@font/alegreya</item>
+        <item>@font/amatic_sc</item>
+        <item>@font/bad_script</item>
+        <item>@font/caveat</item>
+        <item>@font/comfortaa</item>
+        <item>@font/jost</item>
+        <item>@font/jura</item>
+        <item>@font/marck_script</item>
+        <item>@font/merriweather</item>
+        <item>@font/nunito</item>
+        <item>@font/pacifico</item>
+        <item>@font/pangolin</item>
+        <item>@font/poiret_one</item>
+        <item>@font/sofia_sans</item>
+        <item>@font/ubuntu</item>
+        <item>@font/yanone_kaffeesatz</item>
+    </array>
+</resources>
