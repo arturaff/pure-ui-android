@@ -1,9 +1,6 @@
 package ru.arturprgr.pureui.launcher.screens
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,16 +19,13 @@ import java.util.Locale
 
 class AllAppsFragment : Fragment() {
     private lateinit var binding: FragmentAllAppsBinding
-    private lateinit var allAppsAdapter: AllAppsAdapter
     private lateinit var menuMore: PopupMenu
-    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentAllAppsBinding.inflate(inflater, container, false)
-        allAppsAdapter = AllAppsAdapter()
         menuMore = PopupMenu(requireContext(), binding.more)
         menuMore.inflate(R.menu.menu_more)
         menuMore.setOnMenuItemClickListener { item ->
@@ -44,28 +38,8 @@ class AllAppsFragment : Fragment() {
             }
             true
         }
-        sharedPreferences = requireContext().getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
-        Singleton.allAppsList =
-            requireContext().packageManager.getInstalledPackages(PackageManager.GET_META_DATA)
-                .filter { packageInfo ->
-                    requireContext().packageManager.getLaunchIntentForPackage(packageInfo.packageName) != null
-                }.toMutableList()
-
         binding.apply {
-            allApps.adapter = allAppsAdapter
-            for (pack in Singleton.allAppsList) {
-                allAppsAdapter.addApp(
-                    App(
-                        requireContext(),
-                        0,
-                        sharedPreferences.getInt("selectIconRound", 25),
-                        sharedPreferences.getInt("selectIconSize", 50),
-                        "${requireContext().packageManager.getApplicationLabel(pack.applicationInfo)}",
-                        requireContext().packageManager.getApplicationIcon(pack.applicationInfo),
-                        pack.packageName
-                    )
-                )
-            }
+            allApps.adapter = Singleton.allAppsAdapter
 
             editSearch.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -93,8 +67,6 @@ class AllAppsFragment : Fragment() {
                                 App(
                                     requireContext(),
                                     0,
-                                    sharedPreferences.getInt("selectIconRound", 25),
-                                    sharedPreferences.getInt("selectIconSize", 50),
                                     "${requireContext().packageManager.getApplicationLabel(pack.applicationInfo)}",
                                     requireContext().packageManager.getApplicationIcon(pack.applicationInfo),
                                     pack.packageName

@@ -17,4 +17,5 @@
     <string name="opening_the_settings_main_screen">Opening the settings main screen</string>
     <string name="font">Font</string>
     <string name="indentation">Indentation (default 200)</string>
+    <string name="indentation_between_apps">Indentation between apps (default 8)</string>
 </resources>

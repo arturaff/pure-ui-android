@@ -12,31 +12,25 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import ru.arturprgr.pureui.R
+import ru.arturprgr.pureui.backend.data.Params
 import ru.arturprgr.pureui.backend.data.Singleton
 import ru.arturprgr.pureui.databinding.ActivitySettingsBinding
 import ru.arturprgr.pureui.launcher.MainActivity
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
-    private lateinit var appPreview: View
     private lateinit var iconParams: FrameLayout.LayoutParams
     private lateinit var cardParams: LinearLayout.LayoutParams
-    private lateinit var label: TextView
-    private lateinit var icon: ImageView
-    private lateinit var card: CardView
     private lateinit var sharedPreferences: SharedPreferences
 
     @SuppressLint("SetTextI18n")
@@ -49,33 +43,66 @@ class SettingsActivity : AppCompatActivity() {
         )
         enableEdgeToEdge()
         binding = ActivitySettingsBinding.inflate(layoutInflater)
-        appPreview = View.inflate(this@SettingsActivity, R.layout.layout_app, null)
-        label = appPreview.findViewById(R.id.label)
-        icon = appPreview.findViewById(R.id.icon)
-        card = appPreview.findViewById(R.id.card)
-        iconParams = icon.layoutParams as FrameLayout.LayoutParams
-        cardParams = card.layoutParams as LinearLayout.LayoutParams
-        icon.setImageDrawable(packageManager.getApplicationIcon(Singleton.allAppsList[0].packageName))
-        label.text = "${
-            packageManager.getApplicationLabel(
-                packageManager.getApplicationInfo(
-                    Singleton.allAppsList[0].packageName, packageManager.getLaunchIntentForPackage(
-                        Singleton.allAppsList[0].packageName
-                    )!!.flags
-                )
-            )
-        }"
 
         sharedPreferences = getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
         binding.apply {
-            preview.addView(appPreview)
+            iconParams = preview.icon.layoutParams as FrameLayout.LayoutParams
+            cardParams = preview.card.layoutParams as LinearLayout.LayoutParams
+            Params.round.also {
+                selectIconRound.progress = it
+                valueIconRound.text = "$it"
+                preview.card.radius = it.toFloat() * 3
+                first.card.radius = it.toFloat() * 3
+                second.card.radius = it.toFloat() * 3
+            }
+            Params.size.also {
+                selectIconSize.progress = it
+                valueIconSize.text = "$it"
+                iconParams.width = it * 3
+                iconParams.height = it * 3
+                first.icon.setLayoutParams(iconParams)
+                second.icon.setLayoutParams(iconParams)
+                cardParams.width = it * 3
+                cardParams.height = it * 3
+                first.card.setLayoutParams(cardParams)
+                second.card.setLayoutParams(cardParams)
+            }
+            Params.indentation.also {
+                selectIndentation.progress = it
+                valueIndentation.text = "$it"
+            }
+            Params.indentationBetweenApps.also {
+                selectIndentationBetweenApps.progress = it
+                valueIndentationBetweenApps.text = "$it"
+            }
+
+            packageManager.getApplicationIcon(Singleton.allAppsList[0].packageName).also {
+                preview.icon.setImageDrawable(it)
+                first.icon.setImageDrawable(it)
+                second.icon.setImageDrawable(it)
+            }
+            "${
+                packageManager.getApplicationLabel(
+                    packageManager.getApplicationInfo(
+                        Singleton.allAppsList[0].packageName,
+                        packageManager.getLaunchIntentForPackage(
+                            Singleton.allAppsList[0].packageName
+                        )!!.flags
+                    )
+                )
+            }".also {
+                preview.label.text = it
+                first.label.text = it
+                second.label.text = it
+            }
+
             openingTheSettingsMainScreen.setOnClickListener {
                 startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
             }
@@ -91,7 +118,7 @@ class SettingsActivity : AppCompatActivity() {
                     sharedPreferences.edit().putInt("selectIFontItem", position).apply()
                     when (position) {
                         0 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/advent_pro.ttf"
                             )
@@ -101,7 +128,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         1 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/alegreya.ttf"
                             )
@@ -110,7 +137,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         2 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/amatic_sc.ttf"
                             )
@@ -119,7 +146,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         3 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/bad_script.ttf"
                             )
@@ -129,7 +156,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         4 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/caveat.ttf"
                             )
@@ -138,7 +165,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         5 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/comfortaa.ttf"
                             )
@@ -147,7 +174,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         6 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/jost.ttf"
                             )
@@ -156,7 +183,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         7 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/jura.ttf"
                             )
@@ -165,7 +192,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         8 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/marck_script.ttf"
                             )
@@ -175,7 +202,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         9 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/merriweather.ttf"
                             )
@@ -185,7 +212,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         10 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/nunito.ttf"
                             )
@@ -194,7 +221,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         11 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/pacifico.ttf"
                             )
@@ -203,7 +230,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         12 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/pangolin.ttf"
                             )
@@ -212,7 +239,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         13 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/poiret_one.ttf"
                             )
@@ -222,7 +249,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         14 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/sofia_sans.ttf"
                             )
@@ -232,7 +259,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         15 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/ubuntu.ttf"
                             )
@@ -241,7 +268,7 @@ class SettingsActivity : AppCompatActivity() {
                         }
 
                         16 -> {
-                            label.typeface = Typeface.createFromAsset(
+                            preview.label.typeface = Typeface.createFromAsset(
                                 this@SettingsActivity.assets,
                                 "fonts/yanone_kaffeesatz.ttf"
                             )
@@ -263,9 +290,8 @@ class SettingsActivity : AppCompatActivity() {
                     progress: Int,
                     fromUser: Boolean,
                 ) {
-                    //icon rounding
-                    binding.valueIconRound.text = "$progress"
-                    card.radius = progress.toFloat() * 3
+                    valueIconRound.text = "$progress"
+                    preview.card.radius = progress.toFloat() * 3
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -273,14 +299,12 @@ class SettingsActivity : AppCompatActivity() {
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    sharedPreferences.edit().putInt("selectIconRound", seekBar!!.progress).apply()
+                    first.card.radius = seekBar!!.progress.toFloat() * 3
+                    second.card.radius = seekBar.progress.toFloat() * 3
+                    sharedPreferences.edit().putInt("selectIconRound", seekBar.progress).apply()
                     Log.d("Attempt", "${seekBar.id}: ${seekBar.progress}")
                 }
             })
-            sharedPreferences.getInt("selectIconRound", 25).also {
-                selectIconRound.progress = it
-                valueIconRound.text = "$it"
-            }
 
             selectIconSize.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
                 override fun onProgressChanged(
@@ -289,14 +313,14 @@ class SettingsActivity : AppCompatActivity() {
                     fromUser: Boolean,
                 ) {
                     //icon size
-                    binding.selectIconRound.max = (progress / 2)
-                    binding.valueIconSize.text = "$progress"
+                    selectIconRound.max = (progress / 2)
+                    valueIconSize.text = "$progress"
                     iconParams.width = (progress * 3)
                     iconParams.height = (progress * 3)
-                    icon.setLayoutParams(iconParams)
+                    preview.icon.setLayoutParams(iconParams)
                     cardParams.width = (progress * 3)
                     cardParams.height = (progress * 3)
-                    card.setLayoutParams(cardParams)
+                    preview.card.setLayoutParams(cardParams)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -304,14 +328,18 @@ class SettingsActivity : AppCompatActivity() {
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    sharedPreferences.edit().putInt("selectIconSize", seekBar?.progress!!).apply()
+                    iconParams.width = seekBar?.progress!! * 3
+                    iconParams.height = seekBar.progress * 3
+                    first.icon.setLayoutParams(iconParams)
+                    second.icon.setLayoutParams(iconParams)
+                    cardParams.width = seekBar.progress * 3
+                    cardParams.height = seekBar.progress * 3
+                    first.card.setLayoutParams(cardParams)
+                    second.card.setLayoutParams(cardParams)
+                    sharedPreferences.edit().putInt("selectIconSize", seekBar.progress).apply()
                     Log.d("Attempt", "${seekBar.id}: ${seekBar.progress}")
                 }
             })
-            sharedPreferences.getInt("selectIconSize", 50).also {
-                selectIconSize.progress = it
-                valueIconSize.text = "$it"
-            }
 
             selectIndentation.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
                 override fun onProgressChanged(
@@ -319,27 +347,53 @@ class SettingsActivity : AppCompatActivity() {
                     progress: Int,
                     fromUser: Boolean,
                 ) {
-                    binding.valueIndentation.text = "$progress"
-                    binding.info.updateLayoutParams<FrameLayout.LayoutParams> {
+                    valueIndentation.text = "$progress"
+                    info.updateLayoutParams<FrameLayout.LayoutParams> {
                         this.topMargin = progress * 3
                     }
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                    binding.info.isVisible = true
+                    info.isVisible = true
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    binding.info.isVisible = false
+                    info.isVisible = false
                     sharedPreferences.edit().putInt("selectIndentation", seekBar?.progress!!)
                         .apply()
                     Log.d("Attempt", "${seekBar.id}: ${seekBar.progress}")
                 }
             })
-            sharedPreferences.getInt("selectIndentation", 200).also {
-                selectIndentation.progress = it
-                valueIndentation.text = "$it"
-            }
+
+            selectIndentationBetweenApps.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean,
+                ) {
+                    valueIndentationBetweenApps.text = "$progress"
+                    firstApp.updateLayoutParams<LinearLayout.LayoutParams> {
+                        this.topMargin = progress * 3
+                        this.bottomMargin = progress * 3
+                    }
+                    secondApp.updateLayoutParams<LinearLayout.LayoutParams> {
+                        this.topMargin = progress * 3
+                        this.bottomMargin = progress * 3
+                    }
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    apps.isVisible = true
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    apps.isVisible = false
+                    sharedPreferences.edit()
+                        .putInt("selectIndentationBetweenApps", seekBar?.progress!!)
+                        .apply()
+                    Log.d("Attempt", "${seekBar.id}: ${seekBar.progress}")
+                }
+            })
         }
     }
 

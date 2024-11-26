@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.PopupMenu
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import ru.arturprgr.pureui.R
 import ru.arturprgr.pureui.backend.data.Singleton
 import ru.arturprgr.pureui.backend.model.App
+import ru.arturprgr.pureui.backend.data.Params
 import ru.arturprgr.pureui.databinding.LayoutAppBinding
 
 class MainAppsAdapter : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
@@ -24,15 +26,19 @@ class MainAppsAdapter : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
             Log.d("Attempt", "Добавление на главный экран. Индекс: ${app.index}")
             label.text = app.label
             val iconParams = icon.layoutParams as FrameLayout.LayoutParams
-            iconParams.width = (app.size * 3)
-            iconParams.height = (app.size * 3)
+            iconParams.width = Params.size * 3
+            iconParams.height = Params.size * 3
             icon.setLayoutParams(iconParams)
             val cardViewParams = card.layoutParams as LinearLayout.LayoutParams
-            cardViewParams.width = (app.size * 3)
-            cardViewParams.height = (app.size * 3)
+            cardViewParams.width = Params.size * 3
+            cardViewParams.height = Params.size * 3
             card.setLayoutParams(cardViewParams)
-            card.radius = app.round.toFloat() * 3
-            icon.setImageDrawable(app.drawable)
+            card.radius = Params.round.toFloat() * 3
+            icon.setImageDrawable(app.icon)
+            root.updateLayoutParams<RecyclerView.LayoutParams> {
+                this.topMargin = Params.indentationBetweenApps * 3
+                this.bottomMargin = Params.indentationBetweenApps * 3
+            }
             root.setOnClickListener {
                 val intent: Intent? =
                     app.context.packageManager.getLaunchIntentForPackage(app.packageName)

@@ -7,9 +7,7 @@ import java.io.Serializable
 data class App(
     val context: Context,
     val index: Int,
-    val round: Int,
-    val size: Int,
     val label: String,
-    val drawable: Drawable,
+    val icon: Drawable,
     val packageName: String,
 ) : Serializable

@@ -13,11 +13,10 @@ import android.widget.FrameLayout
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.arturprgr.pureui.backend.adapter.MainAppsAdapter
 import ru.arturprgr.pureui.backend.data.Singleton
+import ru.arturprgr.pureui.backend.data.Params
 import ru.arturprgr.pureui.backend.receiver.BatteryReceiver
 import ru.arturprgr.pureui.databinding.FragmentMainBinding
-import ru.arturprgr.pureui.launcher.MainActivity
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
@@ -29,30 +28,15 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        Singleton.mainAppsAdapter = MainAppsAdapter()
         sharedPreferences = requireContext().getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
         typeface = Typeface.createFromAsset(
             requireContext().assets,
             sharedPreferences.getString("fontTypeface", "fonts/advent_pro.ttf")
         )
 
-        for (index in 0..19) {
-            val app = "${sharedPreferences.getString("app$index", "")}"
-            if (app != "") {
-                MainActivity.addApp(
-                    requireContext(),
-                    sharedPreferences,
-                    requireContext().packageManager,
-                    app,
-                    index
-                )
-                Singleton.mainAppsList.add(app)
-            }
-        }
-
         binding.apply {
             layout.updateLayoutParams<FrameLayout.LayoutParams> {
-                this.topMargin = sharedPreferences.getInt("selectIndentation", 400) * 3
+                this.topMargin = Params.indentation * 3
             }
 
             info.clock.setOnLongClickListener {

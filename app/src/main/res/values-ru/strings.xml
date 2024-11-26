@@ -18,4 +18,5 @@
     <string name="opening_the_settings_main_screen">Открыть настройки главного экрана</string>
     <string name="font">Шрифт</string>
     <string name="indentation">Отступ (по умолчанию 200)</string>
+    <string name="indentation_between_apps">Отступ между приложениями (по умолчнию 8)</string>
 </resources>

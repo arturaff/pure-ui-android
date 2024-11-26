@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.PopupMenu
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import ru.arturprgr.pureui.R
 import ru.arturprgr.pureui.backend.data.Singleton
 import ru.arturprgr.pureui.backend.model.App
+import ru.arturprgr.pureui.backend.data.Params
 import ru.arturprgr.pureui.databinding.LayoutAppBinding
 import ru.arturprgr.pureui.launcher.MainActivity
 
@@ -22,17 +24,23 @@ class AllAppsAdapter : RecyclerView.Adapter<AllAppsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(app: App) = with(LayoutAppBinding.bind(itemView)) {
+            val sharedPreferences =
+                app.context.getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
             label.text = app.label
-            icon.setImageDrawable(app.drawable)
+            icon.setImageDrawable(app.icon)
             val iconParams = icon.layoutParams as FrameLayout.LayoutParams
-            iconParams.width = (app.size * 3)
-            iconParams.height = (app.size * 3)
+            iconParams.width = Params.size * 3
+            iconParams.height = Params.size * 3
             icon.setLayoutParams(iconParams)
             val cardViewParams = card.layoutParams as LinearLayout.LayoutParams
-            cardViewParams.width = (app.size * 3)
-            cardViewParams.height = (app.size * 3)
+            cardViewParams.width = Params.size * 3
+            cardViewParams.height = Params.size * 3
             card.setLayoutParams(cardViewParams)
-            card.radius = app.round.toFloat() * 3
+            card.radius = Params.round.toFloat() * 3
+            root.updateLayoutParams<RecyclerView.LayoutParams> {
+                this.topMargin = Params.indentationBetweenApps * 3
+                this.bottomMargin = Params.indentationBetweenApps * 3
+            }
             root.setOnClickListener {
                 val intent: Intent? =
                     app.context.packageManager.getLaunchIntentForPackage(app.packageName)
@@ -44,17 +52,13 @@ class AllAppsAdapter : RecyclerView.Adapter<AllAppsAdapter.ViewHolder>() {
                 popupMenu.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.add_on_main -> {
-                            val sharedPreferences =
-                                app.context.getSharedPreferences("sPrefs", Context.MODE_PRIVATE)
                             Singleton.mainAppsList.add(app.packageName)
                             for (index in 0..19) {
                                 try {
                                     Singleton.mainAppsList[index]
                                 } catch (_: IndexOutOfBoundsException) {
-                                    MainActivity.addApp(
+                                    MainActivity.addAppInMainAdapter(
                                         app.context,
-                                        sharedPreferences,
-                                        app.context.packageManager,
                                         app.packageName,
                                         index
                                     )

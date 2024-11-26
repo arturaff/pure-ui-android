@@ -41,7 +41,6 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/icon_rounding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -66,7 +65,6 @@
                     tools:text="25" />
 
                 <TextView
-                    android:id="@+id/icon_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -91,7 +89,6 @@
                     tools:text="50" />
 
                 <TextView
-                    android:id="@+id/indentation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -116,6 +113,30 @@
                     tools:text="50" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/indentation_between_apps"
+                    android:textSize="18sp" />
+
+                <SeekBar
+                    android:id="@+id/select_indentation_between_apps"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:max="50"
+                    android:progress="200" />
+
+                <TextView
+                    android:id="@+id/value_indentation_between_apps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    tools:text="50" />
+
+                <TextView
                     android:id="@+id/font"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,13 +154,9 @@
                     android:max="50"
                     android:progress="100" />
 
-                <FrameLayout
+                <include
                     android:id="@+id/preview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    tools:ignore="UselessLeaf" />
+                    layout="@layout/layout_app" />
 
             </LinearLayout>
 
@@ -149,13 +166,44 @@
 
     <FrameLayout
         android:id="@+id/info"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00FFFFFF">
+        android:background="#00FFFFFF"
+        android:visibility="gone">
 
         <include layout="@layout/layout_info" />
 
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/apps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#00FFFFFF"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:id="@+id/first_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000">
+
+            <include android:id="@+id/first" layout="@layout/layout_app" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/second_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000">
+
+            <include android:id="@+id/second" layout="@layout/layout_app" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </FrameLayout>
